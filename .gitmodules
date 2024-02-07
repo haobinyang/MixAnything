@@ -1,0 +1,15 @@
+[submodule "corrade"]
+	path = corrade
+	url = https://github.com/mosra/corrade.git
+[submodule "magnum"]
+	path = magnum
+	url = https://github.com/mosra/magnum.git
+[submodule "FFmpeg"]
+	path = FFmpeg
+	url = https://github.com/FFmpeg/FFmpeg.git
+[submodule "cpr"]
+	path = cpr
+	url = https://github.com/libcpr/cpr.git
+[submodule "magnum-plugins"]
+	path = magnum-plugins
+	url = https://github.com/mosra/magnum-plugins.git
