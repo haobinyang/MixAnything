@@ -22,3 +22,6 @@ FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
 FetchContent_MakeAvailable(cpr)
 
 add_subdirectory(src)
+
+add_compile_options(-03)
+add_compile_options(-march=native)

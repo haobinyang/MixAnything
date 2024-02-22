@@ -6,6 +6,8 @@
 #include <Corrade/Containers/StringView.h>
 #include <Magnum/Trade/AbstractImporter.h>
 #include <cpr/cpr.h>
+#include <iostream>
+#include <fstream>
 
 using namespace Magnum;
 
@@ -24,6 +26,17 @@ static Containers::Optional<Trade::ImageData2D> loadImageFromUrl(const Corrade::
   }
 
   return importer->image2D(0);
+}
+
+static void downloadVideo(const std::string& url, const std::string& outputFile) {
+  // 下载视频数据
+  cpr::Response response = cpr::Get(cpr::Url{url});
+  if (response.status_code != 200) {
+    std::cerr << "Failed to download video data" << std::endl;
+    exit(1);
+  }
+  std::ofstream outfile(outputFile, std::ofstream::binary);
+  outfile.write(response.text.data(), response.text.size());
 }
 
 #endif

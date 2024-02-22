@@ -42,6 +42,13 @@ struct ImageConfig: BaseConfig {
 
 struct VideoConfig: BaseConfig {
   Corrade::Containers::StringView url;
+  VideoConfig(
+    MeshConfig meshConfig,
+    TimelineConfig timelineConfig,
+    Effect effect,
+    Int zIndex,
+    Corrade::Containers::StringView url
+  ): BaseConfig{meshConfig, timelineConfig, effect, zIndex}, url{url} {}
 };
 
 #endif

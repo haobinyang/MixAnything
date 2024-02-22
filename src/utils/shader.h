@@ -7,6 +7,8 @@
 #include <Magnum/GL/Shader.h>
 #include <Magnum/GL/Context.h>
 #include <Magnum/GL/Texture.h>
+#include <Magnum/ImageView.h>
+#include <Magnum/PixelFormat.h>
 #include <utility>
 
 using namespace Magnum;
@@ -35,6 +37,16 @@ static GL::Texture2D createTexture(const Containers::Optional<Trade::ImageData2D
     .setMinificationFilter(GL::SamplerFilter::Linear)
     .setStorage(1, GL::textureFormat(imageData->format()), imageData->size())
     .setSubImage(0, {}, *imageData);
+  return texture;
+}
+
+static GL::Texture2D createTexture(const std::vector<uint8_t>& buffer, Int width, Int height) {
+  GL::Texture2D texture;
+  texture.setWrapping(GL::SamplerWrapping::ClampToEdge)
+    .setMagnificationFilter(GL::SamplerFilter::Linear)
+    .setMinificationFilter(GL::SamplerFilter::Linear)
+    .setStorage(1, Magnum::GL::TextureFormat::RGB8, {width, height})
+    .setSubImage(0, {}, Magnum::ImageView2D{Magnum::PixelFormat::RGB8Unorm, {width, height}, {buffer.data(), buffer.size()}});
   return texture;
 }
 

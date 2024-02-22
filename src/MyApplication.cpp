@@ -16,6 +16,7 @@
 
 #include "TexturedQuadShader.h"
 #include "clips/image.h"
+#include "clips/video.h"
 #include "third-part/json.hpp"
 #include "utils/mesh.h"
 #include "utils/network.h"
@@ -23,6 +24,7 @@
 #include "shaders/effects/gray.h"
 #include "enum/common.h"
 #include "structs/clip.h"
+#include "helpers/video.h"
 
 extern "C" {
     #include <libavcodec/avcodec.h>
@@ -65,6 +67,14 @@ MyApplication::MyApplication(const Arguments& arguments): Platform::Application{
     ImageClip imageClip(imageConfig);
     ImageClip imageClip2(imageConfig2);
 
+    VideoConfig videoConfig = {
+        {320, 180, 250, 100, 0.0f},
+        {0, 0},
+        Effect::None,
+        0,
+        "https://wxsnsencsvp.wxs.qq.com/130/20210/snssvpdownload/SH/reserved/yO1laMeugEczXO7icpmLNMPFxXqqCGcxSDUmx1vUhkxcrDC9udVwb6w7SWT20WiaqAm4gCcFjXr1CbibiaUMYe2tlTmeEamhDoia0?dis_k=1fdf827957fd11cceed08e2b39796aed&dis_t=1707212832&idx=1&m=d2a12d42a32b457547ea1bf293cce8a3&sha256=42dff61eaea6ba5735ee6cd90f117519918cf968d0cecd724b2338f1ecc8cc21&token=6xykWLEnztKQv2XKD7VLib1SCnUVPrS1P323hiaqYXlb9ibbpykuKjlfO93urtHkTyZqDtItITu6aMiaCz28xRlc1w"
+    };
+    VideoClip videoClip(videoConfig);
 
     _mesh = createQuadMesh({256.f,256.f}, TexturedQuadShader::Position{}, TexturedQuadShader::TextureCoordinates{});
     auto image = loadImageFromUrl("http://cos.chuangyi.qq.com/53709c9fea8bf1f108bf1e55e6a0a778834a0be4");
@@ -84,6 +94,7 @@ MyApplication::MyApplication(const Arguments& arguments): Platform::Application{
 
     imageClip.render(0);
     imageClip2.render(0);
+    videoClip.render(0);
 
     swapBuffers();
 }
